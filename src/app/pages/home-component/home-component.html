@@ -1,1 +1,36 @@
-<p>home-component works!</p>
+<nav class="navbar navbar-light bg-white border-bottom px-4 d-flex justify-content-between align-items-center">
+  <span class="navbar-brand fw-bold">Our Voices</span>
+  <div class="d-flex align-items-center gap-3">
+    <span class="text-muted">Ciao, {{ username }}</span>
+    <button class="btn btn-outline-secondary btn-sm" (click)="logout()">Logout</button>
+  </div>
+</nav>
+
+<div class="container py-5">
+
+  <h2 class="mb-4">Blog</h2>
+
+  @if (blogs.length === 0) {
+    <p class="text-muted">Nessun blog trovato.</p>
+  }
+
+  <div class="row g-4">
+    @for (blog of blogs; track blog.id) {
+      <div class="col-md-4">
+        <a [routerLink]="['/blogs', blog.id]" class="text-decoration-none text-dark">
+          <div class="card h-100 shadow-sm">
+            <img [src]="blog.image" class="card-img-top" style="height: 180px; object-fit: cover;" alt="{{ blog.title }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ blog.title }}</h5>
+              <p class="card-text text-muted small">{{ blog.description }}</p>
+            </div>
+            <div class="card-footer text-muted small">
+              di {{ blog.author.nickname }}
+            </div>
+          </div>
+        </a>
+      </div>
+    }
+  </div>
+
+</div>
