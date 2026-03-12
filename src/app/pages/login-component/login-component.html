@@ -1,1 +1,43 @@
-<p>login-component works!</p>
+<div class="min-vh-100 d-flex align-items-center justify-content-center bg-light">
+  <div class="card shadow" style="width: 360px;">
+
+    <div class="card-body p-4">
+      <h4 class="card-title text-center mb-4">Our Voices</h4>
+
+      <form (ngSubmit)="onSubmit()">
+
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            id="username"
+            type="text"
+            class="form-control"
+            [(ngModel)]="username"
+            name="username"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            id="password"
+            type="password"
+            class="form-control"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
+        </div>
+
+        @if (errorMessage) {
+          <div class="alert alert-danger py-2">{{ errorMessage }}</div>
+        }
+
+        <button type="submit" class="btn btn-primary w-100">Accedi</button>
+
+      </form>
+    </div>
+
+  </div>
+</div>

@@ -1,14 +1,12 @@
-import { BlogPostStatus } from './enums';
+import { Blog } from './blog.model';
+import { Comment } from './comment.model';
 
-// Specchio del BlogPostDTO del backend.
-// blogId è solo l'id: il backend non annida l'oggetto Blog completo nel DTO.
 export interface BlogPost {
-    id:          number;
-    blogId:      number;
-    publishedOn: string;       // LocalDateTime in Java → stringa ISO in JSON
-    status:      BlogPostStatus;
-    tags:        string;
-    viewCount:   number;
-    title:       string;
-    content:     string;
+    id?:       number;
+    title:     string;
+    text:      string;
+    view:      number;
+    image:     string;
+    blog:      Blog;
+    comments:  Comment[];
 }
