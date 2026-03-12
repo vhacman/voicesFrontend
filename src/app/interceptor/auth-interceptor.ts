@@ -26,8 +26,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
 
+      // Escludo login e register: un 401 su login significa credenziali errate,
+      // non sessione scaduta. Il componente deve gestirlo lui stesso.
+      const isAuthEndpoint = req.url.includes('/login') || req.url.includes('/register');
+
       // Se il server risponde 401 (Non autorizzato) o 403 (Proibito)
-      if (error.status === 401 || error.status === 403) {
+      if (!isAuthEndpoint && (error.status === 401 || error.status === 403)) {
         console.error('Sessione scaduta o non autorizzata. Reindirizzamento...');
 
         // Puliamo il localStorage perché il token non è più valido

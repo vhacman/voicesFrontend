@@ -1,1 +1,75 @@
-<p>profile-component works!</p>
+<nav class="navbar bg-white border-bottom px-4 navbar-main">
+  <a class="navbar-brand" [routerLink]="['/home']">
+    <img src="/img/logo.png" alt="Our Voices" height="40">
+  </a>
+  <span class="fw-bold fs-5 navbar-title">Our Voices</span>
+  <div class="d-flex align-items-center gap-3 ms-auto">
+    <span class="d-flex align-items-center gap-2 text-muted">
+      <i class="bi bi-person-circle fs-5"></i>
+      Ciao, {{ username }}
+    </span>
+    <button class="btn btn-outline-secondary btn-sm" (click)="logout()">Logout</button>
+  </div>
+</nav>
+
+<div class="container py-5 profile-container">
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <div class="d-flex align-items-center gap-3 mb-3">
+        <i class="bi bi-person-circle text-secondary profile-avatar"></i>
+        <div>
+          <h5 class="mb-0">{{ username }}</h5>
+          <span class="badge"
+                [class.bg-danger]="role === 'ADMIN'"
+                [class.bg-secondary]="role !== 'ADMIN'">
+            {{ role }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-header fw-semibold">Cambia password</div>
+    <div class="card-body">
+      <form (ngSubmit)="onChangePassword()">
+
+        <div class="mb-3">
+          <label for="newPassword" class="form-label">Nuova password</label>
+          <input
+            type="password"
+            id="newPassword"
+            class="form-control"
+            [(ngModel)]="newPassword"
+            name="newPassword"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Conferma password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            class="form-control"
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+            required
+          />
+        </div>
+
+        @if (errorMessage) {
+          <div class="alert alert-danger py-2">{{ errorMessage }}</div>
+        }
+        @if (successMessage) {
+          <div class="alert alert-success py-2">{{ successMessage }}</div>
+        }
+
+        <button type="submit" class="btn btn-dark">Salva</button>
+
+      </form>
+    </div>
+  </div>
+
+</div>

@@ -3,6 +3,7 @@ import { authGuard } from './guards/auth-guard';
 import { adminGuard } from './guards/admin-guard';
 import { HomeComponent } from './pages/home-component/home-component';
 import { LoginComponent } from './pages/login-component/login-component';
+import { ChangePasswordComponent } from './pages/change-password-component/change-password-component';
 import { ProfileComponent } from './pages/profile-component/profile-component';
 import { AdminDashboardComponent } from './pages/admin-dashboard-component/admin-dashboard-component';
 import { BlogPageComponent } from './pages/blog-page-component/blog-page-component';
@@ -20,6 +21,10 @@ export const routes: Routes = [
 
   // Login: unica rotta pubblica, non richiede autenticazione
   { path: 'login', component: LoginComponent },
+
+  // Cambio password: richiede il token (utente loggato) ma non controlla mustChangePassword,
+  // perché è proprio qui che l'utente viene mandato quando la password è scaduta.
+  { path: 'change-password', component: ChangePasswordComponent, canActivate: [authGuard] },
 
   // Home: protetta da authGuard, serve il token JWT
   { path: 'home', component: HomeComponent, canActivate: [authGuard] },

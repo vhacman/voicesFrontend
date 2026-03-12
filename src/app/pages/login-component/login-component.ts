@@ -32,7 +32,13 @@ export class LoginComponent implements OnInit
   {
     this.portalUserService.login({ username: this.username, password: this.password })
       .subscribe({
-        next: () => this.router.navigate(['/home']),
+        next: (response) => {
+          // Se la password è scaduta mando l'utente a cambiarla prima di tutto il resto.
+          if (response.mustChangePassword === 'true')
+            this.router.navigate(['/change-password']);
+          else
+            this.router.navigate(['/home']);
+        },
         error: () => this.errorMessage = 'Credenziali non valide'
       });
   }

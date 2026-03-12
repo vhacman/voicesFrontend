@@ -1,0 +1,14 @@
+.navbar-main {
+  position: relative;
+}
+
+.navbar-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.blog-card-img {
+  height: 180px;
+  object-fit: cover;
+}

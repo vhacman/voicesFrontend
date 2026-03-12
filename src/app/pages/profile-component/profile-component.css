@@ -1,0 +1,17 @@
+.navbar-main {
+  position: relative;
+}
+
+.navbar-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.profile-container {
+  max-width: 600px;
+}
+
+.profile-avatar {
+  font-size: 3rem;
+}

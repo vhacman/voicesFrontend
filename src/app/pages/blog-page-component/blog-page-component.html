@@ -1,1 +1,100 @@
-<p>blog-page-component works!</p>
+<nav class="navbar bg-white border-bottom px-4 navbar-main">
+  <a class="navbar-brand" [routerLink]="['/home']">
+    <img src="/img/logo.png" alt="Our Voices" height="40">
+  </a>
+  <span class="fw-bold fs-5 navbar-title">Our Voices</span>
+  <div class="d-flex align-items-center gap-3 ms-auto">
+    <span class="d-flex align-items-center gap-2 text-muted">
+      <i class="bi bi-person-circle fs-5"></i>
+      Ciao, {{ username }}
+    </span>
+    <button class="btn btn-outline-secondary btn-sm" (click)="logout()">Logout</button>
+  </div>
+</nav>
+
+@if (blog) {
+
+  <!-- Header del blog: immagine di copertina con titolo sovrapposto -->
+  <div class="position-relative blog-cover">
+    <img [src]="blog.image" class="w-100 h-100 blog-cover" alt="{{ blog.title }}">
+    <div class="position-absolute bottom-0 start-0 w-100 p-4 blog-cover-overlay">
+      <h1 class="text-white mb-1">{{ blog.title }}</h1>
+      <p class="text-white-50 mb-0 small">di {{ blog.author.nickname }}</p>
+    </div>
+  </div>
+
+  <div class="container py-5">
+    <div class="row g-5">
+
+      <!-- Colonna principale: descrizione + lista post -->
+      <div class="col-lg-8">
+
+        <p class="text-muted mb-4">{{ blog.description }}</p>
+
+        <h4 class="mb-3">Post</h4>
+
+        @if (posts.length === 0) {
+          <p class="text-muted">Nessun post ancora pubblicato.</p>
+        }
+
+        <div class="d-flex flex-column gap-3">
+          @for (post of posts; track post.id) {
+            <a [routerLink]="['/posts', post.id]" class="text-decoration-none text-dark">
+              <div class="card shadow-sm">
+                <div class="row g-0">
+                  @if (post.image) {
+                    <div class="col-md-3">
+                      <img [src]="post.image" class="img-fluid rounded-start h-100 post-thumbnail"
+                           alt="{{ post.title }}">
+                    </div>
+                  }
+                  <div [class]="post.image ? 'col-md-9' : 'col-12'">
+                    <div class="card-body">
+                      <h5 class="card-title mb-1">{{ post.title }}</h5>
+                      <p class="card-text text-muted small">
+                        {{ post.text | slice:0:120 }}@if (post.text.length > 120) {...}
+                      </p>
+                      <span class="text-muted small">
+                        <i class="bi bi-eye"></i> {{ post.view }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          }
+        </div>
+      </div>
+
+      <!-- Sidebar archivio -->
+      <div class="col-lg-4">
+        <div class="card shadow-sm">
+          <div class="card-header fw-semibold">Archivio</div>
+          <div class="card-body p-0">
+
+            @if (archiveYears.length === 0) {
+              <p class="text-muted p-3 mb-0">Nessun post nell'archivio.</p>
+            }
+
+            @for (year of archiveYears; track year) {
+              <div class="border-bottom">
+                <div class="px-3 py-2 fw-semibold bg-light">{{ year }}</div>
+                @for (month of archive[year].months; track month.month) {
+                  @if (month.posts.length > 0) {
+                    <div class="px-4 py-1 d-flex justify-content-between small">
+                      <span>{{ monthName(month.month) }}</span>
+                      <span class="badge bg-secondary rounded-pill">{{ month.posts.length }}</span>
+                    </div>
+                  }
+                }
+              </div>
+            }
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+}

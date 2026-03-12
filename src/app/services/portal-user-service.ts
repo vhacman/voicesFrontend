@@ -23,6 +23,7 @@ export class PortalUserService {
         localStorage.setItem('userId', String(response.userId));
         localStorage.setItem('username', response.username);
         localStorage.setItem('role', response.role);
+        localStorage.setItem('mustChangePassword', response.mustChangePassword);
       })
     );
   }

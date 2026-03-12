@@ -1,0 +1,27 @@
+.navbar-main {
+  position: relative;
+}
+
+.navbar-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.post-cover {
+  height: 320px;
+  overflow: hidden;
+}
+
+.post-cover img {
+  object-fit: cover;
+}
+
+.post-content {
+  max-width: 800px;
+}
+
+.post-text {
+  line-height: 1.8;
+  white-space: pre-wrap;
+}

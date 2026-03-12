@@ -1,9 +1,20 @@
-<nav class="navbar navbar-light bg-white border-bottom px-4 d-flex justify-content-between align-items-center">
-  <span class="navbar-brand fw-bold">Our Voices</span>
-  <div class="d-flex align-items-center gap-3">
-    <span class="text-muted">Ciao, {{ username }}</span>
+<!-- Navbar a tre zone: logo sinistra, titolo centro, profilo+logout destra. -->
+<nav class="navbar bg-white border-bottom px-4 navbar-main">
+
+  <a class="navbar-brand" [routerLink]="['/home']">
+    <img src="/img/logo.png" alt="Our Voices" height="40">
+  </a>
+
+  <span class="fw-bold fs-5 navbar-title">Our Voices</span>
+
+  <div class="d-flex align-items-center gap-3 ms-auto">
+    <span class="d-flex align-items-center gap-2 text-muted">
+      <i class="bi bi-person-circle fs-5"></i>
+      Ciao, {{ username }}
+    </span>
     <button class="btn btn-outline-secondary btn-sm" (click)="logout()">Logout</button>
   </div>
+
 </nav>
 
 <div class="container py-5">
@@ -19,7 +30,7 @@
       <div class="col-md-4">
         <a [routerLink]="['/blogs', blog.id]" class="text-decoration-none text-dark">
           <div class="card h-100 shadow-sm">
-            <img [src]="blog.image" class="card-img-top" style="height: 180px; object-fit: cover;" alt="{{ blog.title }}">
+            <img [src]="blog.image" class="card-img-top blog-card-img" alt="{{ blog.title }}">
             <div class="card-body">
               <h5 class="card-title">{{ blog.title }}</h5>
               <p class="card-text text-muted small">{{ blog.description }}</p>
